@@ -1,12 +1,5 @@
 # Ansible Labs
 
-These are Ansible Labs for the youtube Channel DevOps Journey.
-
-Each folder corrasponds to a video. Follow along and let's learn ansible together.
-
-Video Playlist:
-https://www.youtube.com/watch?v=KuiAiUyuDY4&list=PLnFWJCugpwfzTlIJ-JtuATD2MBBD7_m3u
-
 ## How to use these Labs
 1. Install Oracle Virtual Box:  https://www.virtualbox.org/
 
