@@ -19,3 +19,34 @@ vagrant up
 ``` shell
 vagrant ssh ansible-control
 ```
+
+6. Install Ansible in control-ansible server
+``` shell
+$ sudo apt install ansible -y
+```
+
+7. Install Python in all machines
+``` shell
+$ sudo apt install python -y
+```
+
+7. Generate an SSH key pair in ansible-control server
+``` shell
+$ ssh-keygen
+```
+
+7. Copy the SSH key pair in all other servers
+``` shell
+$ ssh-copy-id db01 && ssh-copy-id web01 && ssh-copy-id web02 && ssh-copy-id loadbalancer
+```
+
+7. Test ssh connection to all other servers
+``` shell
+$ ssh vagrant@db01
+$ ssh vagrant@web01
+$ ssh vagrant@web02
+$ ssh vagrant@loadbalancer
+```
+
+
+
