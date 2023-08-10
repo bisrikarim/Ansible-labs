@@ -1,52 +1,33 @@
 Vagrant.configure("2") do |config|
-  servers=[
-      {
-        :hostname => "ansible-control",
-        :box => "uwbbi/bionic-arm64",
-        :ssh_port => '2200',
-        :ip => "192.168.11.90",
-        :box_version => "1.0.1"
-      },
-      {
-        :hostname => "db01",
-        :box => "uwbbi/bionic-arm64",
-        :ssh_port => '2201',
-        :ip => "192.168.11.91",
-        :box_version => "1.0.1"
-      },
-      {
-        :hostname => "web01",
-        :box => "uwbbi/bionic-arm64",
-        :ssh_port => '2202',
-        :ip => "192.168.11.92",
-        :box_version => "1.0.1"
-      },
-      {
-        :hostname => "web02",
-        :box => "uwbbi/bionic-arm64",
-        :ssh_port => '2203',
-        :ip => "192.168.11.93",
-        :box_version => "1.0.1"
-      },
-      {
-        :hostname => "loadbalancer",
-        :box => "uwbbi/bionic-arm64",
-        :ssh_port => '2204',
-        :ip => "192.168.11.94",
-        :box_version => "1.0.1"
-      }
-    ]
 
-  servers.each do |machine|
-      config.vm.define machine[:hostname] do |node|
-          node.vm.box = machine[:box]
-          node.vm.hostname = machine[:hostname]
-          node.vm.box_version = machine[:box_version]
-          node.vm.network :private_network
-          node.vm.network "forwarded_port", guest: 22, host: machine[:ssh_port], id: "ssh"
-          node.vm.provider "vmware_desktop" do |vb|
-              vb.gui = true
-          end
+  # Define a method to configure each machine
+  def configure_machine(config, name, ip, cpus, gui)
+    config.vm.define name do |machine|
+      machine.vm.box = "generic/ubuntu1804"
+      machine.vbguest.installer_options = { allow_kernel_upgrade: true }
+      machine.vm.network "private_network", ip: ip
+      machine.vm.hostname = name
+      machine.vm.provider "virtualbox" do |vb|
+        vb.memory = "1024" 
+        vb.cpus = cpus
+        vb.gui = gui
       end
+    end
   end
+
+  # Configure ansible-control machine
+  configure_machine(config, "ansible-control", "192.168.30.231", 2, true)
+
+  # Configure db01 machine
+  configure_machine(config, "db01", "192.168.30.232", 1, true)
+
+  # Configure web01 machine
+  configure_machine(config, "web01", "192.168.30.233", 1, true)
+
+  # Configure web02 machine
+  configure_machine(config, "web02", "192.168.30.234", 1, true)
+
+  # Configure loadbalancer machine
+  configure_machine(config, "loadbalancer", "192.168.30.235", 1, true)
+
 end
