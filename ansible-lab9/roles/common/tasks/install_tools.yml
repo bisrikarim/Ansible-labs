@@ -1,8 +1,0 @@
-- name: "Install Common packages"
-  apt: name={{ item }} state=latest
-  with_items:
-   - python-pip
-   - pydf
-   - open-vm-tools
-   - libmysqlclient-dev
-  tags: installation
