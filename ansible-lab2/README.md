@@ -5,11 +5,21 @@
 2. Use service module to manage services
 3. Use ansible to reboot webstack
 
+
 ### Install Services using APT module
-https://docs.ansible.com/ansible/latest/modules/apt_module.html
+## https://docs.ansible.com/ansible/latest/modules/apt_module.html
+
+# Update repositories cache
 ``` shell
 ansible all -i hosts --become -m apt -a "update_cache=yes"
+```
+# Install apache httpd  (state=present is optional)
+``` shell
 ansible webservers -i hosts --become -m apt -a "name=apache2 state=present"
+```
+
+# Install mysql (state=present is optional)
+``` shell
 ansible database -i hosts --become -m apt -a "name=mysql-server state=present"
 ```
 
