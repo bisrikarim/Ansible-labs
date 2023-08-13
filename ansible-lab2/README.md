@@ -5,7 +5,7 @@
 3. Use ansible to reboot webstack
 
 # Install Services using APT module
-## https://docs.ansible.com/ansible/latest/modules/apt_module.html
+### https://docs.ansible.com/ansible/latest/modules/apt_module.html
 ### Update repositories cache
 ``` shell
 ansible all -i hosts --become -m apt -a "update_cache=yes"
@@ -20,7 +20,7 @@ ansible database -i hosts --become -m apt -a "name=mysql-server state=present"
 ```
 
 # Restart Services using Service module
-## https://docs.ansible.com/ansible/latest/modules/service_module.html
+### https://docs.ansible.com/ansible/latest/modules/service_module.html
 ### Start service mysql, if not started
 ``` shell
 ansible database -i hosts -m service -a "name=mysql state=started"
