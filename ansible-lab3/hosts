@@ -1,4 +1,4 @@
-[control]
+s[control]
 ansible-control
 
 [proxy] 
@@ -13,5 +13,5 @@ db01
 
 [webstack:children] 
 proxy 
-web 
+webservers
 database
